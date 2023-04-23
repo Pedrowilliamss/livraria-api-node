@@ -1,8 +1,8 @@
 import RequisicaoIncorreta from "../erros/RequisicaoIncorreta.js";
 
-async function paginar (req, res, next) {
+async function paginar(req, res, next) {
   try {
-    let { limite = 5, pagina = 1, ordenacao = "_id:-1"} = req.query;
+    let { limite = 5, pagina = 1, ordenacao = "_id:-1" } = req.query;
 
     let [campoOrdenacao, ordem] = ordenacao.split(":");
 
@@ -14,8 +14,8 @@ async function paginar (req, res, next) {
 
     if (limite > 0 && pagina > 0) {
       const resultadoPaginado = await resultado.find()
-        .sort({ [campoOrdenacao] : ordem})
-        .skip((pagina -1) * limite)
+        .sort({ [campoOrdenacao]: ordem })
+        .skip((pagina - 1) * limite)
         .limit(limite)
         .exec();
 
